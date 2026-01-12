@@ -9,39 +9,39 @@ public class GenericsTasksTests
     private readonly GenericsTasks _tasks = new();
 
     [Fact]
-    public void GetFirstElement_ShouldReturnFirstElement()
+    public async Task GetFirstElement_ShouldReturnFirstElement()
     {
         // Arrange
         var numbers = new List<int> { 1, 2, 3 };
 
         // Act
-        var result = _tasks.GetFirstElement(numbers);
+        var result = await _tasks.GetFirstElement(numbers);
 
         // Assert
         Assert.Equal(1, result);
     }
 
     [Fact]
-    public void GetFirstElement_ShouldReturnDefaultForEmptyCollection()
+    public async Task GetFirstElement_ShouldReturnDefaultForEmptyCollection()
     {
         // Arrange
         var empty = new List<int>();
 
         // Act
-        var result = _tasks.GetFirstElement(empty);
+        var result = await _tasks.GetFirstElement(empty);
 
         // Assert
         Assert.Equal(0, result);
     }
 
     [Fact]
-    public void Filter_ShouldFilterCollectionByPredicate()
+    public async Task Filter_ShouldFilterCollectionByPredicate()
     {
         // Arrange
         var numbers = new List<int> { 1, 2, 3, 4, 5 };
 
         // Act
-        var result = _tasks.Filter(numbers, x => x % 2 == 0);
+        var result = await _tasks.Filter(numbers, x => x % 2 == 0);
 
         // Assert
         Assert.Equal(new[] { 2, 4 }, result);

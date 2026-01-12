@@ -7,17 +7,21 @@ public class GenericsTasks
     /// Если коллекция пустая, возвращает default значение типа.
     /// В каждом задании используйте async/await.
     /// </summary>
-    public T GetFirstElement<T>(IEnumerable<T> collection)
+    public async Task<T?> GetFirstElement<T>(IEnumerable<T> collection)
     {
-        throw new NotImplementedException();
+        ArgumentNullException.ThrowIfNull(collection);
+        
+        return await Task.FromResult(collection.FirstOrDefault());
     }
 
     /// <summary>
     /// Задание 1.2: Напишите generic метод, который фильтрует коллекцию по предикату.
     /// </summary>
-    public IEnumerable<T> Filter<T>(IEnumerable<T> collection, Func<T, bool> predicate)
+    public async Task<IEnumerable<T>> Filter<T>(IEnumerable<T> collection, Func<T, bool> predicate)
     {
-        throw new NotImplementedException();
+        ArgumentNullException.ThrowIfNull(collection);
+        
+        return await Task.FromResult(collection.Where(predicate ?? (_ => true)));
     }
 
     /// <summary>
@@ -25,10 +29,14 @@ public class GenericsTasks
     /// </summary>
     public void Swap<T>(ref T a, ref T b)
     {
-        throw new NotImplementedException();
+        (a, b) = (b, a);
     }
 
     /// <summary>
     /// Задание 1.4: Создайте generic интерфейс IComparable с методом CompareTo.
     /// </summary>
+    interface IComparable<T>
+    {
+        public int CompareTo(T compared);
+    }
 }
